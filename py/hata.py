@@ -90,6 +90,9 @@ def csvRead(fn):
 
 ######################################
 
+GpioInit()
+
+
 while True:
     tms1=os.stat(Fn).st_mtime
     if tms0<tms1:
@@ -100,6 +103,7 @@ while True:
 
     for i in range(20):
         pl=LinePut(rl,i)
+        DLinePut(rl)
         #DLinePut(pl)
         time.sleep(0.1)  #100ms Wait
         print(pl)
