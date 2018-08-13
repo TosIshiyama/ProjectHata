@@ -19,7 +19,12 @@ $(function(){
 
     var s='';
       for(var i=0;i<20;i++){
-        if(!(i % 10)) s=s+'\n';
+        if(!(i % 10)){
+          if (i !=0 ){
+            s=s.slice(0,-1) // 最後の , カット
+            s=s+'\n';
+          }
+        }
 
         var s1=String(a[i].outerHTML);
         //var s1=String(a[i].);
@@ -28,13 +33,14 @@ $(function(){
 
         if(result>0){
           console.log('Hit');
-          s=s+'1';
+          s=s+'1,';
         }else{
-          s=s+'0';
+          s=s+'0,';
         }
         //console.log(a);
         console.log(i,s);
       }
+    s=s.slice(0,-1) // 最後の , カット
     e.value=s;
   });
 });
