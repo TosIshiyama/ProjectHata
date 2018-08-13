@@ -3,13 +3,15 @@
 
 """ RaspberryPi 上でシーケンサーループさせる """
 
-#import wiringpi # GPIOを制御するライブラリ
+PI=False
 
-import RPi.GPIO as GPIO
+if PI: import RPi.GPIO as GPIO
 
 import time
 import csv
 import os
+
+import pdb
 
 GPIO4 = 7   #　GPIO番号＝PIN番号
 GPIO14 = 8
@@ -24,37 +26,20 @@ Fn = 'PList.csv'
 
 tms0=0  #タイムスタンプリセット
 
-#　サンプルデータ:テスト用
-L0=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-L1=[1,1,0,0,1,1,0,0,1,1,0,1,1,0,0,1,1,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-L2=[0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,
-    0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,
-    0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,
-    0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,
-    0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,
-    0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0]
 
 def DigitalOnOff(port,OnOff):
     """デジタルポートをONまたはOFFさせるON=True,OFF=False"""
     #wiringpi.digitalWrite( port, OnOff )
-    GPIO.output(port,OnOff)
+    sig=False
+    if OnOff=='1': sig=True
+    print('On D OnOff:',port,sig)
+    GPIO.output(port,sig)
 
 def DLinePut(DLine):
     '''６つのポートそれぞれをON/OFF'''
+    print('On DlinePut!',DLine)
     for i,dp in enumerate(DPL):
-        DigitalOnOff(dp,Dline[i])
+        DigitalOnOff(dp,DLine[i])
 
 def GpioInit():
     # GPIO初期化
@@ -63,7 +48,9 @@ def GpioInit():
     # GPIOを出力モード（1）3.3v DigitalOutに設定
     for d in DPL:
         #wiringpi.pinMode( d, 1 )
+        print(d, end="")
         GPIO.setup(d, GPIO.OUT)
+    print("")
 
 def LinePut(mlist,pos):
     """20*6のマトリクスを縦切りにしてpos列を取り出す"""
@@ -90,8 +77,7 @@ def csvRead(fn):
 
 ######################################
 
-GpioInit()
-
+if PI: GpioInit()
 
 while True:
     tms1=os.stat(Fn).st_mtime
@@ -103,7 +89,6 @@ while True:
 
     for i in range(20):
         pl=LinePut(rl,i)
-        DLinePut(rl)
-        #DLinePut(pl)
+        if PI: DLinePut(pl)
         time.sleep(0.1)  #100ms Wait
         print(pl)
