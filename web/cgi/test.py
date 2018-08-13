@@ -1,9 +1,18 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# -*- coding: UTF-8 -*-
 
-print('Content-type: text/html; charset=UTF-8\r\n')
+import cgi, cgitb
+form = cgi.FieldStorage()
 
-print
-print "<html>"
-print "Hello,World!"
-print "</html>"
+# Get data from fields
+name = form.getvalue('name')
+
+print ("Content-type:text/html\n\n")
+print ("<html>")
+print ("<head>")
+print ("<title>Hello, world!</title>")
+print ("</head>")
+print ("<body>")
+print ("Hello, %s!" % (name, ))
+print ("</body>")
+print ("</html>")
