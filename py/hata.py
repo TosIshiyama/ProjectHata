@@ -5,6 +5,8 @@
 
 #import wiringpi # GPIOを制御するライブラリ
 
+import RPi.GPIO as GPIO
+
 import time
 import csv
 import os
@@ -45,8 +47,9 @@ L2=[0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,
     0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0]
 
 def DigitalOnOff(port,OnOff):
-    """デジタルポートをONまたはOFFさせる"""
-    wiringpi.digitalWrite( port, OnOff )
+    """デジタルポートをONまたはOFFさせるON=True,OFF=False"""
+    #wiringpi.digitalWrite( port, OnOff )
+    GPIO.output(port,OnOff)
 
 def DLinePut(DLine):
     '''６つのポートそれぞれをON/OFF'''
@@ -55,10 +58,12 @@ def DLinePut(DLine):
 
 def GpioInit():
     # GPIO初期化
-    wiringpi.wiringPiSetupGpio()
+    GPIO.setmode(GPIO.BOARD) #BOARDはPIN番号指定
+    #wiringpi.wiringPiSetupGpio()
     # GPIOを出力モード（1）3.3v DigitalOutに設定
     for d in DPL:
-        wiringpi.pinMode( d, 1 )
+        #wiringpi.pinMode( d, 1 )
+        GPIO.setup(d, GPIO.OUT)
 
 def LinePut(mlist,pos):
     """20*6のマトリクスを縦切りにしてpos列を取り出す"""
