@@ -1,3 +1,6 @@
+
+
+//イベントドリブン
 $(function(){
   var btn = $('button');
   var e = document.getElementById ('dataview');
@@ -15,8 +18,9 @@ $(function(){
     //console.log(a);
 
     var s='';
-//    for(var j=0;j<2;j++){
-      for(var i=0;i<10;i++){
+      for(var i=0;i<20;i++){
+        if(!(i % 10)) s=s+'\n';
+
         var s1=String(a[i].outerHTML);
         //var s1=String(a[i].);
         var result = s1.indexOf('active');
@@ -31,8 +35,6 @@ $(function(){
         //console.log(a);
         console.log(i,s);
       }
-//      s=s+'\n';
-//    }
     e.value=s;
   });
 });
