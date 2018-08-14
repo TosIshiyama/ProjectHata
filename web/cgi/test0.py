@@ -11,9 +11,9 @@ FN = form.getvalue('file')
 
 
 def csvRead(fn):
-    """CSVファイル読み込み"""
+    """CSVファイル読み込み""" #これをテキスト読み込みにしたらいいんでは？
     #with open('PList.csv', 'r') as f:
-    with open(fn, 'r') as f:
+    with open(fn, 'r') as f:    #CGIの場合ドキュメントルートからのパスを確認すること！
     #with open('PList.csv', 'r') as f:
         reader = csv.reader(f)
         rl=[]
@@ -23,26 +23,30 @@ def csvRead(fn):
 
     return(rl)
 
+html_body = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>受信したデータを表示</title>
+<style>
+h1 {
+font-size: 3em;
+}
+</style>
+</head>
+<body>
+<form action="CGItoCSV.py" method="POST">
+ <textarea name="text" rows="4" cols="40">%s</textarea>
+ <input type="submit" name="submit" />
+</body>
+</html>
+"""
 
-print ("Content-type:text/html\n\n")
-print ("<html>")
-print ("<head>")
-print ("<title>Hello, world!</title>")
-print ("</head>")
-print ("<body>")
-
-print ("Hello, %s!" % (FN, ))
-print (os.getcwd() )
-
-print ("<textarea>")
+#print ("Hello, %s!" % (FN, ))
+#print (os.getcwd() )
 
 
 rl=csvRead(FN)
-print(rl)
 
-print ("</textarea>")
-
-
-
-print ("</body>")
-print ("</html>")
+print(html_body % (rl))
+#print(rl)
