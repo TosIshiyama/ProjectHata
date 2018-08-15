@@ -12,7 +12,7 @@ html_body = """
 </head>
 <body>
 %s<br>
-を、csv化して保存しました。
+を保存しました。
 </body>
 </html>
 """

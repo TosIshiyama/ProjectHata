@@ -15,13 +15,15 @@ def csvRead(fn):
     #with open('PList.csv', 'r') as f:
     with open(fn, 'r') as f:    #CGIの場合ドキュメントルートからのパスを確認すること！
     #with open('PList.csv', 'r') as f:
-        reader = csv.reader(f)
-        rl=[]
-        for row in reader:
-            #print(row)
-            rl.extend(row)
+        s = f.read()
+        #reader = csv.reader(f)
+        #rl=[]
+        #for row in reader:
+        #    #print(row)
+        #    rl.extend(row)
 
-    return(rl)
+    #return(rl)
+    return(s)
 
 html_body = """
 <!DOCTYPE html>
