@@ -55,21 +55,34 @@ l1=lines[0].split(',')
 wk_status=l1[0]
 wait_time=float(l1[1])
 
+print('<div>')
+print('STATUS:')
+print('<input type="text" id="stat" name="stat"')
+print('value="')
 if wk_status=='1':
-    print('WORKING!<br>')
+    print('PLAY')
 else:
-    print('STOP!<br>')
+    print('STOP')
 
-print('WaitTime:',wait_time,'<br/>')
+print('">') #textbox閉じる
+print(' / WaitTime:')
+print('<input type="text" id="WaitTime" name="WaitTime"')
+print('value="')
+
+print(wait_time)
+print('">') #textbox閉じる
+print('sec')
+
+print('</div>')
 
 #２行目以降
 for i in range(1,7):
     #print(i,lines[i],'<br>')
     pos=lines[i].split(',')
-    for j in pos:
+    for jn,j in enumerate(pos):
         #print('<button type="button" class="btn" name="1-01"> </button>')
         #nmStr=str(i)+'-'+'{0:02d}'.format(j)
-        nmStr=str(i)+'-'+str(j)
+        nmStr=str(i)+'-'+str(jn+1)
         act=' '
         if j == '1':
             act=' active'
