@@ -1,5 +1,3 @@
-
-
 //イベントドリブン
 $(function(){
   var btn = $('button');
@@ -24,7 +22,7 @@ $(function(){
 
     var s='';
     //var s1=String(stat.outerHTML);
-    var s1=stat.value;  //valueではプレースホルダーを取れず。。
+    var s1=stat.value;
       console.log('STAT=',s1);
     var result = s1.indexOf('PLAY');
     if(result>0){
@@ -36,7 +34,7 @@ $(function(){
     }
 
     //var s2=String(waitSec.outerHTML);
-    var s2=waitSec.value;  //valueではプレースホルダーを取れず。。
+    var s2=waitSec.value;
       console.log('Wait=',s2);
 
     s=s+s2+'\n';
