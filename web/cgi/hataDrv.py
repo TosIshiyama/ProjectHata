@@ -95,12 +95,10 @@ print("<hr/>")
 
 html_body1="""
 <form action="CGItoCSV.py" method="POST">
- <textarea name="text" rows="4" cols="40">%s</textarea>
+ <textarea id="dataview" name="text" rows="8" cols="42">%s</textarea>
  <input type="submit" name="submit" />
 
 <hr/>
-<textarea id="dataview" name="dataview" cols="40" rows="6">
-</textarea>
 
 """
 print(html_body1 % (rl))
