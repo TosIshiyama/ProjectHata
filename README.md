@@ -6,7 +6,9 @@
 * py/ 以下の python3スクリプトでアクチュエータをドライブする
 * web/ 以下でpython3 cgiを作成、Web上からアクチュエータ振動パターンをデザインできるようにする
 
-
+----
+* py/hata.py の冒頭の PI=False を TrueにすればGPIOにアクセス（RaspberryPiモード）になる。Falseではデバッグ用プリントのみ。
+----
 
 ### パターンリストCSV仕様メモ
 * LINE1> RUN:1/STOP:0 , 1フレーム停止時間(s)
