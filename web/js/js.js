@@ -4,7 +4,7 @@
 $(function(){
   var btn = $('button');
   var e = document.getElementById ('dataview');
-  e.value = 'hoge';
+  //e.value = 'hoge';
   btn.click(function(){
     var a = document.getElementsByClassName('btn');
     var id =  $(this).attr("name");
@@ -18,8 +18,8 @@ $(function(){
     //console.log(a);
 
     var s='';
-      for(var i=0;i<20;i++){
-        if(!(i % 10)){
+      for(var i=0;i<(20*6);i++){
+        if(!(i % 20)){
           if (i !=0 ){
             s=s.slice(0,-1) // 最後の , カット
             s=s+'\n';
