@@ -51,15 +51,22 @@ rl=txtFileRead(FN)
 lines=rl.splitlines()
 
 #csvの1行めはRUN/STOP,フレームSec
+# ---仕様変更。スタート＆ストップはstartstop.datで確認
+
+with open('startstop.dat','r') as ssf:
+    sss = ssf.read()
+    #print('SSS=',sss)
+    wk_status=int(sss.strip())
+#print('wk_status:',wk_status)
 l1=lines[0].split(',')
-wk_status=l1[0]
-wait_time=float(l1[1])
+#wk_status=l1[0]
+wait_time=float(l1[0])
 
 print('<div>')
 print('STATUS:')
 print('<input type="text" id="stat" name="stat"')
 print('value="')
-if wk_status=='1':
+if wk_status==1 :
     print('PLAY')
 else:
     print('STOP')

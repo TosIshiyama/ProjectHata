@@ -22,6 +22,7 @@ $(function(){
 
     var s='';
     //var s1=String(stat.outerHTML);
+    /*
     var s1=stat.value;
       console.log('STAT=',s1);
     var result = s1.indexOf('PLAY');
@@ -32,12 +33,14 @@ $(function(){
       console.log('Stoping!');
       s = '0,'
     }
+    */
 
     //var s2=String(waitSec.outerHTML);
     var s2=waitSec.value;
       console.log('Wait=',s2);
 
-    s=s+s2+'\n';
+      //s=s+s2+'\n';
+      s=s2+'\n';
 
       for(var i=0;i<(20*6);i++){
         if(!(i % 20)){
