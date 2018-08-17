@@ -12,7 +12,8 @@ cgitb.enable()
 form = cgi.FieldStorage()
 
 # Get data from fields
-FN = form.getvalue('file')
+#FN = form.getvalue('file')
+FN = "PList.csv"    #ファイルは決め打ちにする
 
 
 def txtFileRead(fn):
@@ -63,8 +64,8 @@ l1=lines[0].split(',')
 wait_time=float(l1[0])
 
 print('<div>')
-print('STATUS:')
-print('<input type="text" id="stat" name="stat"')
+print('MODE:')
+print('<input type="text" id="stat" name="stat" size=6')
 print('value="')
 if wk_status==1 :
     print('PLAY')
@@ -72,8 +73,12 @@ else:
     print('STOP')
 
 print('">') #textbox閉じる
-print(' / WaitTime:')
-print('<input type="text" id="WaitTime" name="WaitTime"')
+
+print('<input id="PlayStopBtn" type="button" value="PlayBtn" onclick="OnPlayButtonClick();"/><br />')
+
+print('<br/>')
+print('<br/>WaitTime:')
+print('<input type="text" id="WaitTime" name="WaitTime" size=6')
 print('value="')
 
 print(wait_time)

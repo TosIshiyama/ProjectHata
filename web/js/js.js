@@ -1,5 +1,18 @@
-//イベントドリブン
-$(function(){
+//Project Hata 用JS
+function OnPlayButtonClick() {
+      target = document.getElementById("PlayStopBtn");
+      if (target.value == 'PLAY'){
+        target.value = "STOP";
+      } else {
+        target.value = "PLAY";  
+      }
+}
+
+
+$(
+
+
+  function(){
   var btn = $('button');
   var e = document.getElementById ('dataview');
   var stat = document.getElementById ('stat');
