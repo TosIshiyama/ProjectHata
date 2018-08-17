@@ -1,13 +1,16 @@
-
-
 //イベントドリブン
 $(function(){
   var btn = $('button');
   var e = document.getElementById ('dataview');
-  e.value = 'hoge';
+  var stat = document.getElementById ('stat');
+  var waitSec = document.getElementById ('WaitTime');
+
+  //console.log(stat,waitSec);
+
+  //e.value = 'hoge';
   btn.click(function(){
     var a = document.getElementsByClassName('btn');
-    var id =  $(this).attr("name");
+    var name =  $(this).attr("name"); //name拾っているが使ってない
     //btn.removeClass('active');
     if ($(this).hasClass('active')) {
       $(this).removeClass('active');
@@ -18,8 +21,29 @@ $(function(){
     //console.log(a);
 
     var s='';
-      for(var i=0;i<20;i++){
-        if(!(i % 10)){
+    //var s1=String(stat.outerHTML);
+    /*
+    var s1=stat.value;
+      console.log('STAT=',s1);
+    var result = s1.indexOf('PLAY');
+    if(result>0){
+      console.log('Playing!');
+      s = '1,'
+    }else{
+      console.log('Stoping!');
+      s = '0,'
+    }
+    */
+
+    //var s2=String(waitSec.outerHTML);
+    var s2=waitSec.value;
+      console.log('Wait=',s2);
+
+      //s=s+s2+'\n';
+      s=s2+'\n';
+
+      for(var i=0;i<(20*6);i++){
+        if(!(i % 20)){
           if (i !=0 ){
             s=s.slice(0,-1) // 最後の , カット
             s=s+'\n';

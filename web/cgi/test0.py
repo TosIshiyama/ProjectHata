@@ -11,7 +11,7 @@ FN = form.getvalue('file')
 
 
 def csvRead(fn):
-    """CSVファイル読み込み""" #これをテキスト読み込みにしたらいいんでは？
+    """テキストファイル読み込み"""
     #with open('PList.csv', 'r') as f:
     with open(fn, 'r') as f:    #CGIの場合ドキュメントルートからのパスを確認すること！
     #with open('PList.csv', 'r') as f:
