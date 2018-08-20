@@ -8,7 +8,8 @@ html_body = """
 <!DOCTYPE html>
 <html>
 <head>
-<title>受信したデータ</title>
+<title>受信したデータテスト表示</title>
+<meta http-equiv="refresh"content="0; url=HataSystem.py"> <!-- 自動でページ戻り -->
 </head>
 <body>
 %s<br>
@@ -21,13 +22,8 @@ html_body = """
 form = cgi.FieldStorage()
 text = form.getvalue('text','')
 
-# 読み込んだ文字列のCR(\r)を削除する。 # Windowsだと勝手にCRLFになってしまうので対策
+# 以下、Windowsでの実行対策：読み込んだ文字列のCR(\r)を削除する。（Windowsだと勝手にCRLFになってしまうので。）
 txt = text.replace('\r', '')
-
-
-#with open('test.csv','w') as f:
-#with open('PList.csv','w') as f:
-#    f.write(text)
 
 # ファイルをバイナリモードで開く
 with open('PList.csv', 'wb') as a_file:

@@ -1,10 +1,11 @@
 //Project Hata 用JS
 function OnPlayButtonClick() {
+      //不要。使わないことにした。
       target = document.getElementById("PlayStopBtn");
       if (target.value == 'PLAY'){
         target.value = "STOP";
       } else {
-        target.value = "PLAY";  
+        target.value = "PLAY";
       }
 }
 

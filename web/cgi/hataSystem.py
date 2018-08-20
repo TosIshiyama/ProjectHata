@@ -73,8 +73,9 @@ else:
     print('STOP')
 
 print('">') #textbox閉じる
-
-print('<input id="PlayStopBtn" type="button" value="PlayBtn" onclick="OnPlayButtonClick();"/><br />')
+print('<form action="ssDatCng.py">')
+print('<input id="PlayStopBtn" type="submit" value="Play/Stop" /><br />')
+print('</form>')
 
 print('<br/>')
 print('<br/>WaitTime:')
