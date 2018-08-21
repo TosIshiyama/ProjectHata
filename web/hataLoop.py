@@ -7,6 +7,12 @@ PI=True
 
 if PI: import RPi.GPIO as GPIO
 
+if PI:
+    path='/home/pi/ProjectHata/web/'
+else:
+    path=''
+
+
 import time
 import csv
 import os
@@ -22,8 +28,8 @@ GPIO27 = 13
 
 DPL = [GPIO4,GPIO14,GPIO15,GPIO17, GPIO18, GPIO27]   #使用するデジタルポートリスト
 
-Fn = 'PList.csv'    #決め打ち
-datFn = 'startstop.dat'
+Fn = path+'PList.csv'    #決め打ち
+datFn = path+'startstop.dat'
 
 tms0=0  #タイムスタンプリセット
 tmsd0=0  #タイムスタンプリセット
@@ -34,12 +40,12 @@ def DigitalOnOff(port,OnOff):
     #wiringpi.digitalWrite( port, OnOff )
     sig=False
     if OnOff=='1': sig=True
-    print('On D OnOff:',port,sig)
+    #print('On D OnOff:',port,sig)
     GPIO.output(port,sig)
 
 def DLinePut(DLine):
     '''６つのポートそれぞれをON/OFF'''
-    print('On DlinePut!',DLine)
+    print('DLinePut!',DLine)
     for i,dp in enumerate(DPL):
         DigitalOnOff(dp,DLine[i])
 
@@ -109,7 +115,7 @@ while True:
             pl=LinePut(rl,i)
             if PI: DLinePut(pl)
             #time.sleep(0.1)  #100ms Wait
-            time.sleep(waitSec)  #100ms Wait
+            time.sleep(waitSec)
             print(pl)
     else:
         if PI: DLinePut([0,0,0,0,0,0])
