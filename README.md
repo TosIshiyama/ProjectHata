@@ -31,9 +31,13 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 ↑これらのファイルをhataLoop.pyで読み、実行する。
 
 ----
+# 実行
+raspberryPi上で /ProjectHata/web/hataLoop.pyを実行する。  
 
-# メモ
-* RaspberryPiでApache2をセットアップ、pythonスクリプトをCGIで実行可に。
+----
+
+### メモ
+* RaspberryPiにはApache2がセットアップされている、pythonスクリプトをCGIで実行可に。
 * pi上からはlocalhost/web/cgi/hataSystem.py でWebからの操作ができる。
 * なお、現在のRaspberryPiはローカルアドレス： 10.18.51.0 にあり。
 http://10.18.51.0/web/cgi/hataSystem.py
