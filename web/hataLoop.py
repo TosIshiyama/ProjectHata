@@ -45,7 +45,7 @@ def DigitalOnOff(port,OnOff):
 
 def DLinePut(DLine):
     '''６つのポートそれぞれをON/OFF'''
-    print('DLinePut!',DLine)
+    #print('DLinePut!',DLine)
     for i,dp in enumerate(DPL):
         DigitalOnOff(dp,DLine[i])
 
