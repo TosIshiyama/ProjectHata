@@ -7,7 +7,7 @@
 * web/ 以下でpython3 cgiを作成、Web上からアクチュエータ振動パターンをデザインできるようにする
 
 ----
-* py/hata.py の冒頭の PI=False を TrueにすればGPIOにアクセス（RaspberryPiモード）になる。Falseではデバッグ用プリントのみ。
+* 各スクリプト冒頭の PI=False を TrueにすればRaspberryPi上で実行されているとみなしてGPIOにアクセス（RaspberryPiモード）になる。Falseではデバッグ用プリントのみ。
 ----
 
 ### パターンリストCSV仕様メモ
@@ -29,3 +29,12 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 * 実行しているか止まっているかを1,0でセット
 
 ↑これらのファイルをhataLoop.pyで読み、実行する。
+
+----
+
+# メモ
+* RaspberryPiでApache2をセットアップ、pythonスクリプトをCGIで実行可に。
+* pi上からはlocalhost/web/cgi/hataSystem.py でWebからの操作ができる。
+* なお、現在のRaspberryPiはローカルアドレス： 10.18.51.0 にあり。
+http://10.18.51.0/web/cgi/hataSystem.py
+でLAN環境からはアクセス可
