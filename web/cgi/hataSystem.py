@@ -11,9 +11,17 @@ cgitb.enable()
 
 form = cgi.FieldStorage()
 
+PI=True
+
+if PI:
+    path='/home/pi/ProjectHata/web/'
+else:
+    path=''
+
+
 # Get data from fields
 #FN = form.getvalue('file')
-FN = "/home/pi/ProjectHata/web/PList.csv"    #ファイルは決め打ちにする
+FN = path + "PList.csv"
 
 
 def txtFileRead(fn):
@@ -55,7 +63,7 @@ lines=rl.splitlines()
 #csvの1行めはRUN/STOP,フレームSec
 # ---仕様変更。スタート＆ストップはstartstop.datで確認
 
-with open('/home/pi/ProjectHata/web/startstop.dat','r') as ssf:
+with open(path + 'startstop.dat','r') as ssf:
     sss = ssf.read()
     #print('SSS=',sss)
     wk_status=int(sss.strip())

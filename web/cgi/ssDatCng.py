@@ -3,18 +3,25 @@
 
 import os
 
-with open('/home/pi/ProjectHata/web/startstop.dat', 'r') as f:
+PI=True
+
+if PI:
+    path='/home/pi/ProjectHata/web/'
+else:
+    path=''
+
+with open(path+'startstop.dat', 'r') as f:
     s = f.read()
 
 startstopFlg = int(s.strip())
 
 ss=''
 if startstopFlg == 1:
-    with open('/home/pi/ProjectHata/web/startstop.dat', 'w') as f:
+    with open(path+'startstop.dat', 'w') as f:
         f.write('0')
     ss='STOP Changed'
 else:
-    with open('/home/pi/ProjectHata/web/startstop.dat', 'w') as f:
+    with open(path+'startstop.dat', 'w') as f:
         f.write('1')
     ss='PLAY Changed'
 
