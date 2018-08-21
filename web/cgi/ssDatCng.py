@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+import thisis
 
-PI=True
 
-if PI:
+#PI=True
+
+if thisis.PI:
     path='/home/pi/ProjectHata/web/'
 else:
     path=''

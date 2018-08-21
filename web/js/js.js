@@ -1,12 +1,23 @@
 //Project Hata 用JS
-function OnPlayButtonClick() {
-      //不要。使わないことにした。
-      target = document.getElementById("PlayStopBtn");
-      if (target.value == 'PLAY'){
-        target.value = "STOP";
-      } else {
-        target.value = "PLAY";
-      }
+
+function waitTextValueCng($this) {
+    console.log($this.value);
+    var viewArea = document.getElementById ('dataview');
+    //console.log(viewArea.value);
+    //ここで自動的にviewAreaの最初の行を差し替えるようにしてもよいかも（未実装）
+    //document.getElementById("dataview").value = $this.value + viewArea.value;
+
+
+}
+
+function cpFileBtnOn($this) {
+    console.log($this.value);
+    //var viewArea = document.getElementById ('dataview');
+    //console.log(viewArea.value);
+    //ここで自動的にviewAreaの最初の行を差し替えるようにしてもよいかも（未実装）
+    document.getElementById("csvFileNameText").value = $this.value;
+
+
 }
 
 

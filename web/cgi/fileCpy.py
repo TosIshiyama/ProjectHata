@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 import cgi
-
 import thisis
 
 #PI=False
@@ -13,27 +13,26 @@ if thisis.PI:
 else:
     path=''
 
+
+form = cgi.FieldStorage()
+text = form.getvalue('inCSVFile','')
+
+#print(text)
+
+shutil.copyfile(path+ text, path+"PList.csv")
+
+
 html_body = """
 <!DOCTYPE html>
 <html>
 <head>
-<title>CSV Updated</title>
-<meta http-equiv="refresh"content="0; url=hataSystem.py">
+<title>FileCopy change</title>
+<meta http-equiv="refresh"content="1; url=hataSystem.py">
 </head>
 <body>
-%s<br>
-<A HREF="hataSystem.py">back</A>
+%s -> PList.csv
 </body>
 </html>
 """
-
-form = cgi.FieldStorage()
-text = form.getvalue('text','')
-
-txt = text.replace('\r', '')
-
-with open(path+'PList.csv', 'wb') as a_file:
-  a_file.write(txt.encode('utf-8'))
-
 print("Content-type: text/html")
 print(html_body % (text))

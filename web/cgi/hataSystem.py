@@ -7,13 +7,17 @@ import os
 
 import cgitb
 
+import thisis
+
+
 cgitb.enable()
 
 form = cgi.FieldStorage()
 
-PI=True
 
-if PI:
+
+#PI=False
+if thisis.PI:
     path='/home/pi/ProjectHata/web/'
 else:
     path=''
@@ -34,7 +38,7 @@ html_body0 = """
 <!DOCTYPE html>
 <html>
 <head>
-<title>ProjectHataシーケンサ</title>
+<title>ProjectHata Vibration Sequencer</title>
 
 <link rel="stylesheet" type="text/css" href="../css/html5reset-1.6.1.css"  />
 <link rel="stylesheet" type="text/css" href="../css/btn.css"  />
@@ -52,7 +56,7 @@ font-size: 3em;
 
 """
 
-print "Content-Type: text/html;charset=ISO-2022-JP\n"
+print("Content-Type: text/html;charset=ISO-2022-JP\n")
 print(html_body0)
 
 rl=txtFileRead(FN)
@@ -88,7 +92,7 @@ print('</form>')
 
 print('<br/>')
 print('<br/>WaitTime:')
-print('<input type="text" id="WaitTime" name="WaitTime" size=6')
+print('<input type="text" id="WaitTime" name="WaitTime" size=6 onKeyUp="waitTextValueCng(this)" ')
 print('value="')
 
 print(wait_time)
@@ -118,12 +122,31 @@ print("<hr/>")
 html_body1="""
 <form action="CGItoCSV.py" method="POST">
  <textarea id="dataview" name="text" rows="8" cols="42">%s</textarea>
- <input type="submit" name="submit" />
-
+ <input type="submit" name="submit" value="DataSend"/>
+</form>
 <hr/>
 
 """
 print(html_body1 % (rl))
 #print(rl)
+
+
+html_body2="""
+PRE-SET: <input type="submit" value="EMA.csv" onclick="cpFileBtnOn(this)" /> <input type="submit" value="WAVE.csv" onclick="cpFileBtnOn(this)"/>
+<input type="submit" value="all_0.csv" onclick="cpFileBtnOn(this)"/> <input type="submit" value="all_1.csv" onclick="cpFileBtnOn(this)"/>
+<input type="submit" value="PList0.csv" onclick="cpFileBtnOn(this)"/>
+<form action="fileCpy.py" method="POST">
+ <input type="text" id="csvFileNameText" name="inCSVFile" size="30" value="%s">
+
+ <input type="submit" name="csvCp" value="CSV LOAD"/>
+</form>
+
+<hr/>
+
+"""
+rl='PList0.csv'
+print(html_body2 % (rl))
+
+
 
 print("<hr/></body></html>")
