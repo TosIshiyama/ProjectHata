@@ -37,6 +37,7 @@ raspberryPi上で /ProjectHata/web/hataLoop.pyを実行する。
 ----
 
 ### メモ
+* cgi/thisis.py の中のPI=Falseで実行環境がRasPiかどうかを判断している。（まだcgi系だけ）
 * RaspberryPiにはApache2がセットアップされている、pythonスクリプトをCGIで実行可に。
 * pi上からはlocalhost/web/cgi/hataSystem.py でWebからの操作ができる。
 * なお、現在のRaspberryPiはローカルアドレス： 10.18.51.0 にあり。
