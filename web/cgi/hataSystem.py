@@ -13,7 +13,7 @@ form = cgi.FieldStorage()
 
 # Get data from fields
 #FN = form.getvalue('file')
-FN = "PList.csv"    #ファイルは決め打ちにする
+FN = "/home/pi/ProjectHata/web/PList.csv"    #ファイルは決め打ちにする
 
 
 def txtFileRead(fn):
@@ -44,6 +44,7 @@ font-size: 3em;
 
 """
 
+print "Content-Type: text/html;charset=ISO-2022-JP\n"
 print(html_body0)
 
 rl=txtFileRead(FN)
@@ -54,7 +55,7 @@ lines=rl.splitlines()
 #csvの1行めはRUN/STOP,フレームSec
 # ---仕様変更。スタート＆ストップはstartstop.datで確認
 
-with open('startstop.dat','r') as ssf:
+with open('/home/pi/ProjectHata/web/startstop.dat','r') as ssf:
     sss = ssf.read()
     #print('SSS=',sss)
     wk_status=int(sss.strip())

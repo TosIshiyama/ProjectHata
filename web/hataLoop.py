@@ -3,7 +3,7 @@
 
 """ RaspberryPi 上でシーケンサーループさせる """
 
-PI=False
+PI=True
 
 if PI: import RPi.GPIO as GPIO
 

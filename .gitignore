@@ -3,3 +3,6 @@
 
 #pycファイルはいらない
 *.pyc
+*.swp
+
+/web/PList.csv
