@@ -6,4 +6,4 @@
 *.swp
 
 /web/PList.csv
-/web/cgi/thisis.py
+thisis.py

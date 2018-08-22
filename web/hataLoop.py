@@ -3,11 +3,13 @@
 
 """ RaspberryPi 上でシーケンサーループさせる """
 
-PI=True
+import thisis
 
-if PI: import RPi.GPIO as GPIO
+#PI=False
 
-if PI:
+if thisis.PI: import RPi.GPIO as GPIO
+
+if thisis.PI:
     path='/home/pi/ProjectHata/web/'
 else:
     path=''
@@ -85,7 +87,7 @@ def csvRead(fn):
 
 ######################################
 
-if PI: GpioInit()
+if thisis.PI: GpioInit()
 
 startstopFlg=0
 
@@ -113,9 +115,9 @@ while True:
         print("wait:",waitSec)
         for i in range(20):
             pl=LinePut(rl,i)
-            if PI: DLinePut(pl)
+            if thisis.PI: DLinePut(pl)
             #time.sleep(0.1)  #100ms Wait
             time.sleep(waitSec)
             print(pl)
     else:
-        if PI: DLinePut([0,0,0,0,0,0])
+        if thisis.PI: DLinePut([0,0,0,0,0,0])
