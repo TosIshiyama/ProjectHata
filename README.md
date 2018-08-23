@@ -2,10 +2,42 @@
 
 # RaspberryPiで動作する振動アクチュエータドライバ
 
-## 目標
-* py/ 以下の python3スクリプトでアクチュエータをドライブする
-* web/ 以下でpython3 cgiを作成、Web上からアクチュエータ振動パターンをデザインできるようにする
+## 目的
+* パーキンソン病の方が意図せず指先が震えてしまう現象を是正したい。
 
+## 設計
+* 腕に巻いたバンドにセットされた振動アクチュエータを特定のパターンで振動させることによって、脳と指先の間の神経伝達フィードバックをジャミングできる（らしい？）→成功例あり
+
+
+## プログラム仕様
+* pythonでcgiを作成、Web上からアクチュエータ振動パターンをデザインできるようにする
+
+## 実装
+* HTMLもPython（cgi）から自動生成して表示
+  * /web/cgi/hataSystem.py
+* シーケンスデータの編集はJavaScriptでリアルタイム編集できるようにした
+  * /js/js.js
+* 実際の動作部もpythonのスクリプトとし、RaspberryPi上で実行、GPIO制御で振動アクチュエータをドライブする。
+  * /web/hataLoop.py
+
+## ダウンロードと環境設定
+https://github.com/TosIshiyama/ProjectHata  
+からzipをダウンロードするか、  
+コンソールより  
+> git clone https://github.com/TosIshiyama/ProjectHata  
+でプロジェクト全体をクローンする。  
+
+* pythonスクリプトをCGIで実行可に
+> chmod 755 *.py  
+
+* csv ファイルを書き込み可に
+> chmod 666 *.csv  
+
+* thisis.py をweb/ と web/cgi以下に作成。内容は
+> PI = True  
+または　　
+> PI = False  
+とする。(TrueでRaspberryPi、FalseでWindows環境を想定）
 ----
 ## 環境と動作
 * デバッグ用にWindowsでサーバーを立ち上げ、GPIOアクセスはしない状態でテスト動作するようにした。
@@ -18,7 +50,7 @@
 * メインプログラムのループは web/hataLoop.pyにあり、 pyhton3 hataLoop.py　を予め実行しておく。
   * raspberryPi上では /ProjectHata/web/hataLoop.py
 
----- 
+----
 
 ### パターンリストCSV仕様メモ
 * LINE1> 1フレーム停止時間(s)
@@ -43,4 +75,3 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 ----
 
 ### メモ
-
