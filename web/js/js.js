@@ -11,18 +11,16 @@ function waitTextValueCng($this) {
 }
 
 function cpFileBtnOn($this) {
+  // Copyボタン押されると呼び出される。csvFileNameTextの値をボタンの値に
     console.log($this.value);
-    //var viewArea = document.getElementById ('dataview');
-    //console.log(viewArea.value);
-    //ここで自動的にviewAreaの最初の行を差し替えるようにしてもよいかも（未実装）
     document.getElementById("csvFileNameText").value = $this.value;
 
-
+    // *.csvをリスト化してプルダウンリストにしてもよいかも？（未実装）
 }
 
 
 $(
-
+  // シーケンサーマトリクスクリックチェック用
 
   function(){
   var btn = $('button');
@@ -46,19 +44,6 @@ $(
     //console.log(a);
 
     var s='';
-    //var s1=String(stat.outerHTML);
-    /*
-    var s1=stat.value;
-      console.log('STAT=',s1);
-    var result = s1.indexOf('PLAY');
-    if(result>0){
-      console.log('Playing!');
-      s = '1,'
-    }else{
-      console.log('Stoping!');
-      s = '0,'
-    }
-    */
 
     //var s2=String(waitSec.outerHTML);
     var s2=waitSec.value;

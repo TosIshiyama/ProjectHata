@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+'''
+   RaspberryPi 上でシーケンサーループさせる実行部
+'''
 
-""" RaspberryPi 上でシーケンサーループさせる """
+import thisis   # thisis.pyは cgi以下に本体があるのでln -sでシンボリック・リンクしておく。
 
-import thisis
-
-#PI=False
-
+# 実行環境がRaspberryPIかそうでないかを判定、PI環境ならばGPIOをimport
 if thisis.PI: import RPi.GPIO as GPIO
 
 if thisis.PI:
@@ -18,7 +18,6 @@ else:
 import time
 import csv
 import os
-
 import pdb
 
 GPIO4 = 7   #　GPIO番号＝PIN番号

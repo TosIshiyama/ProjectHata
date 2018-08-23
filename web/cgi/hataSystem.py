@@ -1,30 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+'''
+   ProjectHata用振動子シーケンサー管理用プログラム
+'''
 
 import cgi, cgitb
 import csv
 import os
-
-import cgitb
-
 import thisis
 
-
-cgitb.enable()
-
+cgitb.enable()  #CGIプログラムのデバッグ用：詳細 http://www.gesource.jp/programming/python/cgi/0116.html
 form = cgi.FieldStorage()
 
-
-
-#PI=False
+# 実行環境がRaspberryPIかそうでないかを判定
 if thisis.PI:
     path='/home/pi/ProjectHata/web/'
 else:
     path=''
 
-
-# Get data from fields
-#FN = form.getvalue('file')
+# FNにcsvのファイル名をセット
 FN = path + "PList.csv"
 
 
@@ -34,6 +28,7 @@ def txtFileRead(fn):
         s = f.read()
     return(s)
 
+# HTMLテキストを作成、表示部
 html_body0 = """
 <!DOCTYPE html>
 <html>
@@ -59,6 +54,7 @@ font-size: 3em;
 print("Content-Type: text/html;charset=ISO-2022-JP\n")
 print(html_body0)
 
+# CSVファイルを取り込み
 rl=txtFileRead(FN)
 
 #rlは全体文字列なので行ごとに分割してList化
@@ -146,7 +142,5 @@ PRE-SET: <input type="submit" value="EMA.csv" onclick="cpFileBtnOn(this)" /> <in
 """
 rl='PList0.csv'
 print(html_body2 % (rl))
-
-
 
 print("<hr/></body></html>")
