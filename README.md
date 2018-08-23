@@ -25,18 +25,22 @@ https://github.com/TosIshiyama/ProjectHata
 からzipをダウンロードするか、  
 コンソールより  
 > git clone https://github.com/TosIshiyama/ProjectHata  
+
 でプロジェクト全体をクローンする。  
 
 * pythonスクリプトをCGIで実行可に
 > chmod 755 *.py  
 
-* csv ファイルを書き込み可に
+* csv ファイルとdatを書き込み可に
 > chmod 666 *.csv  
+> chmod 666 *.dat  
 
 * thisis.py をweb/ と web/cgi以下に作成。内容は
 > PI = True  
+
 または　　
 > PI = False  
+
 とする。(TrueでRaspberryPi、FalseでWindows環境を想定）
 ----
 ## 環境と動作
