@@ -20,6 +20,9 @@
 * 実際の動作部もpythonのスクリプトとし、RaspberryPi上で実行、GPIO制御で振動アクチュエータをドライブする。
   * /web/hataLoop.py
 
+## 基本構成ブロック図
+https://github.com/TosIshiyama/ProjectHata/blob/master/ProjectHataBlockDiagram.pdf
+
 ## ダウンロードと環境設定
 https://github.com/TosIshiyama/ProjectHata  
 からzipをダウンロードするか、  
