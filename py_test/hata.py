@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" RaspberryPi 上でシーケンサーループさせる """
+""" RaspberryPi 上でシーケンサーループさせる
+    ※※※※　これはテストプログラム：旧仕様なので注意　※※※※
+"""
 
 PI=False
 
