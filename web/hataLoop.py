@@ -48,31 +48,36 @@ default_x_a = 25.0
 default_y_a = 8.0
 
 def s18(value):
-    ''' ３軸センサ用 '''
+    ''' ３軸センサ用 フィルタ'''
     return -(value & 0b100000000000) | (value & 0b011111111111)
 
 def senserRead():
+    ''' ３軸センサデータ読み込み＆出力'''
     x_l = i2c.read_byte_data(address, 0x28)
     x_h = i2c.read_byte_data(address, 0x29)
     #print(x_l,x_h)
     x_a = (x_h << 8 | x_l) >> 4
     x_a = s18(x_a)/1024.0*980.0 - default_x_a
-    print("X:%6.2f" % (x_a), end='')
+    #print("X:%6.2f" % (x_a), end='')
 
     y_l = i2c.read_byte_data(address, 0x2A)
     y_h = i2c.read_byte_data(address, 0x2B)
     y_a = (y_h << 8 | y_l) >> 4
     y_a = s18(y_a)/1024.0*980.0 - default_y_a
-    print("Y:%6.2f" % (y_a), end='')
+    #print(" Y:%6.2f" % (y_a), end='')
 
     z_l = i2c.read_byte_data(address, 0x2C)
     z_h = i2c.read_byte_data(address, 0x2D)
     z_a = (z_h << 8 | z_l) >> 4
     z_a = s18(z_a)/1024.0*980.0
-    print("Z:%6.2f" % (z_a), end='')
+    #print(" Z:%6.2f" % (z_a), end='')
 
     gal = math.hypot(x_a, y_a)
-    print("Gal:%6.2f" % (gal))
+    #print(" G:%6.2f" % (gal))
+
+    ret='%6.2f, %6.2f, %6.2f' % (x_a,y_a,z_a)
+
+    return(ret)
 
 def DigitalOnOff(port,OnOff):
     """デジタルポートをONまたはOFFさせるON=True,OFF=False"""
@@ -155,7 +160,8 @@ while True:
             pl=LinePut(rl,i)
             if thisis.PI:
                 DLinePut(pl)
-                senserRead()
+                ans = senserRead()
+                print(ans)
 
             #time.sleep(0.1)  #100ms Wait
             time.sleep(waitSec)
