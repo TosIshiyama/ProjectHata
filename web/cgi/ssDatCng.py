@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+''' START／STOP ボタンを押した時に呼ばれる
+ startstop.dat の内容を0－＞１ ／　1-＞０にトグルチェンジする
+'''
+
 import os
 import thisis
 
@@ -21,12 +25,13 @@ ss=''
 if startstopFlg == 1:
     with open(path+'startstop.dat', 'w') as f:
         f.write('0')
-    ss='STOP Changed'
+    ss='Changed to [STOP]'
 else:
     with open(path+'startstop.dat', 'w') as f:
         f.write('1')
-    ss='PLAY Changed'
+    ss='Changed to [PLAY]'
 
+# Webページ表示０秒後にhataSystem.pyを再度呼び出す
 html_body = """
 <!DOCTYPE html>
 <html>
