@@ -165,7 +165,7 @@ while True:
                 DLinePut(pl)
                 ans = senserRead()
                 print(ans)
-                mojiretu = ','.join(str_list) + ',' + ans
+                mojiretu = ','.join(pl) + ',' + ans
                 with open(OutPutCSV, 'a') as of: # a = 追加書き込みモード
                     of.write(mojiretu)
             #time.sleep(0.1)  #100ms Wait
