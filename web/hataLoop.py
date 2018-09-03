@@ -11,6 +11,7 @@ if thisis.PI: import RPi.GPIO as GPIO
 
 if thisis.PI:
     path='/home/pi/ProjectHata/web/'
+    import smbus
 else:
     path=''
 
@@ -20,7 +21,7 @@ import csv
 import os
 import pdb
 
-import smbus
+#import smbus
 import math
 
 
@@ -43,7 +44,8 @@ tms0=0  #タイムスタンプリセット
 tmsd0=0  #タイムスタンプリセット
 
 # i2c　３軸センサー用
-i2c = smbus.SMBus(1)
+if thisis.PI:
+    i2c = smbus.SMBus(1)
 address = 0x19
 
 # 平常時のXYZ軸の値が0になるように下記の値を修正する
