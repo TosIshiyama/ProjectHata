@@ -33,8 +33,11 @@ GPIO27 = 13
 
 DPL = [GPIO4,GPIO14,GPIO15,GPIO17, GPIO18, GPIO27]   #使用するデジタルポートリスト
 
-Fn = path+'PList.csv'    #決め打ち
+#File
+Fn = path+'PList.csv'
 datFn = path+'startstop.dat'
+OutPutCSV = path+'output.dat'
+
 
 tms0=0  #タイムスタンプリセット
 tmsd0=0  #タイムスタンプリセット
@@ -162,7 +165,8 @@ while True:
                 DLinePut(pl)
                 ans = senserRead()
                 print(ans)
-
+                with open(OutPutCSV, 'a') as of: # a = 追加書き込みモード
+                    of.write(pl,ans)
             #time.sleep(0.1)  #100ms Wait
             time.sleep(waitSec)
             print(pl)
