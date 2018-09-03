@@ -87,7 +87,6 @@ def DLinePut(DLine):
     #print('DLinePut!',DLine)
     for i,dp in enumerate(DPL):
         DigitalOnOff(dp,DLine[i])
-    senserRead()
 
 
 def GpioInit():
@@ -154,7 +153,10 @@ while True:
         print("wait:",waitSec)
         for i in range(20):
             pl=LinePut(rl,i)
-            if thisis.PI: DLinePut(pl)
+            if thisis.PI:
+                DLinePut(pl)
+                senserRead()
+
             #time.sleep(0.1)  #100ms Wait
             time.sleep(waitSec)
             print(pl)
