@@ -47,8 +47,8 @@ i2c = smbus.SMBus(1)
 address = 0x19
 
 # 平常時のXYZ軸の値が0になるように下記の値を修正する
-default_x_a = 0.0
-default_y_a = 0.0
+default_x_a = 34.0
+default_y_a = -5.0
 default_z_a = 980.0
 
 def s18(value):
