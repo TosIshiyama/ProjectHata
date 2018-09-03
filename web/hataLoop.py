@@ -46,9 +46,10 @@ tmsd0=0  #タイムスタンプリセット
 i2c = smbus.SMBus(1)
 address = 0x19
 
-# 平常時のX軸、Y軸の値が0になるように下記の値を修正してください
-default_x_a = 25.0
-default_y_a = 8.0
+# 平常時のXYZ軸の値が0になるように下記の値を修正する
+default_x_a = 0.0
+default_y_a = 0.0
+default_z_a = 980.0
 
 def s18(value):
     ''' ３軸センサ用 フィルタ'''
@@ -72,7 +73,7 @@ def senserRead():
     z_l = i2c.read_byte_data(address, 0x2C)
     z_h = i2c.read_byte_data(address, 0x2D)
     z_a = (z_h << 8 | z_l) >> 4
-    z_a = s18(z_a)/1024.0*980.0
+    z_a = s18(z_a)/1024.0*980.0 - default_z_a
     #print(" Z:%6.2f" % (z_a), end='')
 
     gal = math.hypot(x_a, y_a)
