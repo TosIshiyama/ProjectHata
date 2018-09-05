@@ -177,7 +177,7 @@ while True:
                 print(ans)
                 # ３軸センサーデータをファイルに出力
                 n=datetime.datetime.now() # 日時を取得：2018-09-05 11:55:22.566385
-                mojiretu = n + ',' + ','.join(pl) + ',' + ans +'\n'
+                mojiretu = str(n) + ',' + ','.join(pl) + ',' + ans +'\n'
                 with open(OutPutCSV, 'a') as of: # a = 追加書き込みモード
                     # センサーデータ書き出し。※いちいちオープンし直しているので時間がかかると思われる。ファイルオープンが追い付かない場合はループ外でOpenさせるとよい
                     of.write(mojiretu)
