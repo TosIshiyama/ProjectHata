@@ -4,7 +4,7 @@
    RaspberryPi 上でシーケンサーループさせる実行部
 '''
 
-import thisis   # thisis.pyは cgi以下に本体があるのでln -sでシンボリック・リンクしておく。
+import thisis   # thisis.pyは cgi以下に実体があるので、Linux環境は ln -sでシンボリック・リンクしておく。
 
 # 実行環境がRaspberryPIかそうでないかを判定、PI環境ならばGPIOをimport
 if thisis.PI: import RPi.GPIO as GPIO
@@ -15,7 +15,7 @@ if thisis.PI:
 else:
     path=''
 
-
+import datetime
 import time
 import csv
 import os
@@ -23,7 +23,6 @@ import pdb
 
 #import smbus
 import math
-
 
 GPIO4 = 7   #　GPIO番号＝PIN番号
 GPIO14 = 8
@@ -43,6 +42,8 @@ OutPutCSV = path+'output.dat'
 tms0=0  #タイムスタンプリセット
 tmsd0=0  #タイムスタンプリセット
 
+
+### ココより3軸センサー用追加
 # i2c　３軸センサー用
 if thisis.PI:
     i2c = smbus.SMBus(1)
@@ -51,7 +52,7 @@ address = 0x19
 # 平常時のXYZ軸の値が0になるように下記の値を修正する
 default_x_a = 34.0
 default_y_a = -5.0
-default_z_a = 980.0
+default_z_a = 980.0 #重力加速度は 980
 
 def s18(value):
     ''' ３軸センサ用 フィルタ'''
@@ -84,9 +85,11 @@ def senserRead():
     ret='%6.2f, %6.2f, %6.2f' % (x_a,y_a,z_a)
 
     return(ret)
+### ３軸センサー用追加ここまで
+
 
 def DigitalOnOff(port,OnOff):
-    """デジタルポートをONまたはOFFさせるON=True,OFF=False"""
+    '''デジタルポートをONまたはOFFさせるON=True,OFF=False'''
     #wiringpi.digitalWrite( port, OnOff )
     sig=False
     if OnOff=='1': sig=True
@@ -101,7 +104,7 @@ def DLinePut(DLine):
 
 
 def GpioInit():
-    # GPIO初期化
+    '''GPIO初期化'''
     GPIO.setmode(GPIO.BOARD) #BOARDはPIN番号指定
     #wiringpi.wiringPiSetupGpio()
     # GPIOを出力モード（1）3.3v DigitalOutに設定
@@ -112,18 +115,18 @@ def GpioInit():
     print("")
 
 def LinePut(mlist,pos):
-    """20*6のマトリクスを縦切りにしてpos列を取り出す"""
+    '''20*6のマトリクスを縦切りにしてpos列を取り出す'''
     p=[0,0,0,0,0,0]
     for i in range(6):
         pp=pos+i*20
         if pp>20*6:
             pp=pp-(20*6)
-        p[i] = mlist[pp +1 ]    #+1で冒頭のWaitTimeをカット
+        p[i] = mlist[pp +1 ]    #+1で冒頭のWaitTime分をカット
     return(p)
 
 
 def csvRead(fn):
-    """CSVファイル読み込み"""
+    '''CSVファイル読み込み'''
     #with open('PList.csv', 'r') as f:
     with open(fn, 'r') as f:
         reader = csv.reader(f)
@@ -134,12 +137,14 @@ def csvRead(fn):
 
     return(rl)
 
-######################################
+
+##### 以下、メインルーチン
 
 if thisis.PI: GpioInit()
 
 startstopFlg=0
 
+# メインループ
 while True:
     #タイムスタンプ確認
     tms1=os.stat(Fn).st_mtime
@@ -165,14 +170,22 @@ while True:
         for i in range(20):
             pl=LinePut(rl,i)
             if thisis.PI:
+                # 振動子を震わす
                 DLinePut(pl)
+                # ３３軸センサから値読み出し
                 ans = senserRead()
                 print(ans)
-                mojiretu = ','.join(pl) + ',' + ans +'\n'
+                # ３軸センサーデータをファイルに出力
+                n=datetime.datetime.now() # 日時を取得：2018-09-05 11:55:22.566385
+                mojiretu = n + ',' + ','.join(pl) + ',' + ans +'\n'
                 with open(OutPutCSV, 'a') as of: # a = 追加書き込みモード
+                    # センサーデータ書き出し。※いちいちオープンし直しているので時間がかかると思われる。ファイルオープンが追い付かない場合はループ外でOpenさせるとよい
                     of.write(mojiretu)
             #time.sleep(0.1)  #100ms Wait
             time.sleep(waitSec)
             print(pl)
     else:
-        if thisis.PI: DLinePut([0,0,0,0,0,0])
+        if thisis.PI:
+            # Pi上でストップ時は振動子を全０にして停止
+            DLinePut([0,0,0,0,0,0])
+            # 振動停止時にも三軸センサーデータを出力しておきたい場合はここに記述

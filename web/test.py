@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# 三軸センサ用テストプログラム
+
 import smbus
 import time
 import math
@@ -40,4 +42,3 @@ while True:
     print("Gal:%6.2f" % (gal))
 
     time.sleep(1)
-
