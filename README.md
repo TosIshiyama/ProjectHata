@@ -44,7 +44,8 @@ https://github.com/TosIshiyama/ProjectHata
 または　　
 > PI = False  
 
-とする。(TrueでRaspberryPi、FalseでWindows環境を想定）
+とする。(TrueでRaspberryPi、FalseでWindows環境を想定）   
+
 ----
 ## 環境と動作
 * デバッグ用にWindowsでサーバーを立ち上げ、GPIOアクセスはしない状態でテスト動作するようにした。
@@ -83,7 +84,7 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 
 ### メモ
 
-### 自動実行について
+### 自動実行について  
 pi@raspberrypi:~ $ cat /home/pi/start.sh  
 #!/bin/sh  
 cd /home/pi/ProjectHata/web  
@@ -91,15 +92,18 @@ sudo i2cset -y 1 0x19 0x20 0x27 b
 sudo i2cset -y 1 0x18 0x20 0x27 b  
 python3 hataLoop.py &  
 
-↑このスクリプトを/etc/rc.local から呼び出し、電源投入後自動起動するようにした。参考：http://hendigi.karaage.xyz/2016/11/auto-boot/
+↑このスクリプトを/etc/rc.local から呼び出し、電源投入後自動起動するようにした。参考：http://hendigi.karaage.xyz/2016/11/auto-boot/  
 
 
 
-### output.dat について
+### output.dat について  
 output.datに３軸センサからの入力値を記録する（追加上書き）  
-データ内容は以下の通り（csv風）
-＞date&time(ミリ秒), a(アクチュエータ)1のON/OFF,a2,a3,a4,a5,a6,センサch1_x,ch1_y,ch1_z,センサch2_x,ch2_y,ch2_z  
-↓サンプル  
+
+データ内容は以下の通り（csv風）  
+
+> date&time(ミリ秒), a(アクチュエータ)1のON/OFF,a2,a3,a4,a5,a6,センサch1_x,ch1_y,ch1_z,センサch2_x,ch2_y,ch2_z  
+
+↓output.dat結果サンプル  
 2018-09-07 12:46:51.853485,1,1,1,0,1,0,279.91, 357.19, -122.50,-700.09, -419.92, -1489.14  
 2018-09-07 12:46:52.060986,1,0,0,0,1,0,283.73, 357.19, -122.50,-692.44, -419.92, -1492.97  
 2018-09-07 12:46:52.267392,1,1,1,1,0,1,272.25, 357.19, -114.84,-703.92, -419.92, -1496.80  
@@ -142,4 +146,4 @@ pi@raspberrypi:~/ProjectHata $ sudo i2cdetect -y 1
 > $ sudo i2cset -y 1 0x19 0x20 0x27 b  
 > $ sudo i2cset -y 1 0x18 0x20 0x27 b  
 
-↑これでEnabele。（必要）
+↑これでEnabele。（start.shから実行）
