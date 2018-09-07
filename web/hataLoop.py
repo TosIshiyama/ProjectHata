@@ -47,7 +47,8 @@ tmsd0=0  #タイムスタンプリセット
 # i2c　３軸センサー用
 if thisis.PI:
     i2c = smbus.SMBus(1)
-address = 0x19
+address1 = 0x18     # LISD3DH ch1 address
+address2 = 0x19     # LISD3DH ch2 address
 
 # 平常時のXYZ軸の値が0になるように下記の値を修正する
 default_x_a = 34.0
@@ -58,7 +59,7 @@ def s18(value):
     ''' ３軸センサ用 フィルタ'''
     return -(value & 0b100000000000) | (value & 0b011111111111)
 
-def senserRead():
+def senserRead(address):
     ''' ３軸センサデータ読み込み＆出力'''
     x_l = i2c.read_byte_data(address, 0x28)
     x_h = i2c.read_byte_data(address, 0x29)
@@ -173,11 +174,12 @@ while True:
                 # 振動子を震わす
                 DLinePut(pl)
                 # ３３軸センサから値読み出し
-                ans = senserRead()
-                print(ans)
+                ans1 = senserRead(address1)
+                ans2 = senserRead(address2)
+                print(ans1,ans2)
                 # ３軸センサーデータをファイルに出力
                 n=datetime.datetime.now() # 日時を取得：2018-09-05 11:55:22.566385
-                mojiretu = str(n) + ',' + ','.join(pl) + ',' + ans +'\n'
+                mojiretu = str(n) + ',' + ','.join(pl) + ',' + ans1 +',' + ans2 +'\n'
                 with open(OutPutCSV, 'a') as of: # a = 追加書き込みモード
                     # センサーデータ書き出し。※いちいちオープンし直しているので時間がかかると思われる。ファイルオープンが追い付かない場合はループ外でOpenさせるとよい
                     of.write(mojiretu)
