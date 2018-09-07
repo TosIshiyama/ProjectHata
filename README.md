@@ -133,13 +133,13 @@ pi@raspberrypi:~/ProjectHata $ sudo i2cdetect -y 1
 70: -- -- -- -- -- -- -- --  
 ↑18と19の2chを使用する  
 
-`pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x19 0x0f b  `
-0x33  
-pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x18 0x0f b  `
-0x33  
+> pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x19 0x0f b  
+`0x33`  
+> pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x18 0x0f b
+`0x33`  
 ↑で接続確認（0x33が帰る）  
 
-`pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x19 0x20 0x27 b  `
-`pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x18 0x20 0x27 b  `
+> pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x19 0x20 0x27 b  
+> pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x18 0x20 0x27 b
 
 ↑これでEnabele。（必要）
