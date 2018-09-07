@@ -83,7 +83,7 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 
 ### メモ
 
-**　自動実行について
+###　自動実行について
 pi@raspberrypi:~ $ cat /home/pi/start.sh  
 #!/bin/sh  
 cd /home/pi/ProjectHata/web  
@@ -95,7 +95,7 @@ python3 hataLoop.py &
 
 
 
-** output.dat について
+### output.dat について
 output.datに３軸センサからの入力値を記録する（追加上書き）  
 データ内容は以下の通り（csv風）
 ＞date&time(ミリ秒), a(アクチュエータ)1のON/OFF,a2,a3,a4,a5,a6,センサch1_x,ch1_y,ch1_z,センサch2_x,ch2_y,ch2_z  
@@ -112,14 +112,14 @@ output.datに３軸センサからの入力値を記録する（追加上書き�
 
 
 
-** outtail.sh について  
+### outtail.sh について  
 outtail.shは、たまっていくoutput.datの整理用シェルスクリプト。output.datの末尾５００行のみを残し、前のほうはカットする。  
 crontab で１時間ごとに自動起動するようにするとよい
 crontab -l  
 0 * * * * /home/pi/ProjectHata/outtail.sh  
 ↑こんなかんじで(cronの実行はRaspberryPiでは自動実行されていないことがあるので注意 $ sudo /etc/init.d/cron start で起動)
 
-** 加速度センサLISD3DHについて
+### 加速度センサLISD3DHについて
 参考：https://qiita.com/sh8/items/d48488c7ae8817de6074  
 pi@raspberrypi:~/ProjectHata $ sudo i2cdetect -y 1  
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  
@@ -133,12 +133,13 @@ pi@raspberrypi:~/ProjectHata $ sudo i2cdetect -y 1
 70: -- -- -- -- -- -- -- --  
 ↑18と19の2chを使用する  
 
-pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x19 0x0f b  
+`pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x19 0x0f b  `
 0x33  
-pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x18 0x0f b  
+pi@raspberrypi:~/ProjectHata $ sudo i2cget -y 1 0x18 0x0f b  `
 0x33  
 ↑で接続確認（0x33が帰る）  
 
-pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x19 0x20 0x27 b  
-pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x18 0x20 0x27 b  
+`pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x19 0x20 0x27 b  `
+`pi@raspberrypi:~/ProjectHata $ sudo i2cset -y 1 0x18 0x20 0x27 b  `
+
 ↑これでEnabele。（必要）
