@@ -83,7 +83,7 @@ pi@raspberrypi:~/ProjectHata/py $ cat PList.csv
 
 ### メモ
 
-###　自動実行について
+### 自動実行について
 pi@raspberrypi:~ $ cat /home/pi/start.sh  
 #!/bin/sh  
 cd /home/pi/ProjectHata/web  
@@ -114,12 +114,12 @@ output.datに３軸センサからの入力値を記録する（追加上書き�
 
 ### outtail.sh について  
 outtail.shは、たまっていくoutput.datの整理用シェルスクリプト。output.datの末尾５００行のみを残し、前のほうはカットする。  
-crontab で１時間ごとに自動起動するようにするとよい
-crontab -l  
+crontab で１時間ごとに自動起動するようにするとよい  
+crontab -l   
 0 * * * * /home/pi/ProjectHata/outtail.sh  
-↑こんなかんじで(cronの実行はRaspberryPiでは自動実行されていないことがあるので注意 $ sudo /etc/init.d/cron start で起動)
+↑こんなかんじで(cronの実行はRaspberryPiでは自動実行されていないことがあるので注意 $ sudo /etc/init.d/cron start で起動)  
 
-### 加速度センサLISD3DHについて
+### 加速度センサLISD3DHについて  
 参考：https://qiita.com/sh8/items/d48488c7ae8817de6074  
 pi@raspberrypi:~/ProjectHata $ sudo i2cdetect -y 1  
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f  
