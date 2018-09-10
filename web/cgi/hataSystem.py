@@ -150,7 +150,7 @@ rl='PList0.csv'
 #[r.split('/')[-1] for r in glob.glob('test/*')]
 csvList=[r.split('/')[-1] for r in glob.glob(path + "*.csv")]
 
-csvList.remove(FN)
+csvList.remove(PLIST)
 
 print('Preset Pattern CSV List<br/>')
 print('<select id="listbox" size="5" />')
