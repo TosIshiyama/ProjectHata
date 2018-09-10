@@ -147,7 +147,7 @@ rl='PList0.csv'
 
 csvList=glob.glob(path + "*.csv")
 
-csvList.remove(PLIST)
+csvList.remove(FN)
 
 print('Preset Pattern CSV List<br/>')
 print('<select id="listbox" size="5" />')
