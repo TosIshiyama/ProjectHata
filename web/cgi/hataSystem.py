@@ -35,6 +35,7 @@ html_body0 = """
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv=”Cache-Control” content=”no-cache”>
 <title>ProjectHata Vibration Sequencer</title>
 
 <link rel="stylesheet" type="text/css" href="../css/html5reset-1.6.1.css"  />
