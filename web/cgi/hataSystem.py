@@ -7,6 +7,7 @@
 import cgi, cgitb
 import csv
 import os
+import glob
 import thisis
 
 cgitb.enable()  #CGIプログラムのデバッグ用：詳細 http://www.gesource.jp/programming/python/cgi/0116.html
@@ -19,7 +20,8 @@ else:
     path=''
 
 # FNにcsvのファイル名をセット
-FN = path + "PList.csv"
+PLIST = "PList.csv"
+FN = path + PLIST
 
 
 def txtFileRead(fn):
@@ -138,9 +140,33 @@ PRE-SET: <input type="submit" value="EMA.csv" onclick="cpFileBtnOn(this)" /> <in
 </form>
 
 <hr/>
-
 """
+
 rl='PList0.csv'
-print(html_body2 % (rl))
+#print(html_body2 % (rl))
+
+csvList=glob.glob(path + "*.csv")
+
+csvList.remove(PLIST)
+
+print('Preset Pattern CSV List<br/>')
+print('<select id="listbox" size="5" />')
+#print('<select id="listbox" size="5"  />')
+
+for lst in csvList:
+    print('  <option value="%s">%s</option>' % (lst,lst))
+print('</select>')
+
+
+html_body2="""
+<form action="fileCpy.py" method="POST">
+ <input type="text" id="csvFileNameText" name="inCSVFile" size="30" value="%s">
+
+ <input type="submit" name="csvCp" value="LOAD"/>
+</form>
+
+<hr/>
+"""
+print(html_body2 % (csvList[0]))
 
 print("<hr/></body></html>")

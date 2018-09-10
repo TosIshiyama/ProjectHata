@@ -50,7 +50,7 @@ if thisis.PI:
 address1 = 0x18     # LISD3DH ch1 address
 address2 = 0x19     # LISD3DH ch2 address
 
-# 平常時のXYZ軸の値が0になるように下記の値を修正する
+# 平常時のXYZ軸の値が0になるように下記の値を修正する ※両チャンネル同じなので別指定できるようにすべき？
 default_x_a = 34.0
 default_y_a = -5.0
 default_z_a = 980.0 #重力加速度は 980
