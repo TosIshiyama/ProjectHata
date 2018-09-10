@@ -35,6 +35,7 @@ html_body0 = """
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv=”Cache-Control” content=”no-cache”>
 <title>ProjectHata Vibration Sequencer</title>
 
 <link rel="stylesheet" type="text/css" href="../css/html5reset-1.6.1.css"  />
@@ -145,7 +146,9 @@ PRE-SET: <input type="submit" value="EMA.csv" onclick="cpFileBtnOn(this)" /> <in
 rl='PList0.csv'
 #print(html_body2 % (rl))
 
-csvList=glob.glob(path + "*.csv")
+
+#[r.split('/')[-1] for r in glob.glob('test/*')]
+csvList=[r.split('/')[-1] for r in glob.glob(path + "*.csv")]
 
 csvList.remove(PLIST)
 
