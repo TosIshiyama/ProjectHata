@@ -7,6 +7,8 @@
 import cgi, cgitb
 import csv
 import os
+import sys
+import io
 import glob
 import thisis
 
@@ -23,6 +25,7 @@ else:
 PLIST = "PList.csv"
 FN = path + PLIST
 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')  #日本語処理用のおまじない
 
 def txtFileRead(fn):
     """テキストファイル読み込み"""
@@ -33,8 +36,9 @@ def txtFileRead(fn):
 # HTMLテキストを作成、表示部
 html_body0 = """
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Cache-Control" content="no-cache">
 <title>ProjectHata Vibration Sequencer</title>
 
@@ -50,11 +54,12 @@ font-size: 3em;
 </style>
 </head>
 <body>
+<h1>Project Hata</h1>
 <hr/>
 
 """
 
-print("Content-Type: text/html;charset=ISO-2022-JP\n")
+#print("<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>\n")
 print(html_body0)
 
 # CSVファイルを取り込み
@@ -76,6 +81,7 @@ l1=lines[0].split(',')
 wait_time=float(l1[0])
 
 print('<div>')
+print('<form action="ssDatCng.py">')
 print('MODE:')
 print('<input type="text" id="stat" name="stat" size=6')
 print('value="')
@@ -83,10 +89,8 @@ if wk_status==1 :
     print('PLAY')
 else:
     print('STOP')
-
 print('">') #textbox閉じる
-print('<form action="ssDatCng.py">')
-print('<input id="PlayStopBtn" type="submit" value="Play/Stop" /><br />')
+print('<input id="PlayStopBtn" type="submit" value="Play/Stop" />　←Stopはループ終了時に停止する<br />')
 print('</form>')
 
 print('<br/>')
@@ -124,25 +128,14 @@ html_body1="""
  <textarea id="dataview" name="text" rows="8" cols="42">%s</textarea>
  <input type="submit" name="submit" value="DataSend"/>
 </form>
-<hr/>
+※↑のデータを[DataSend]ボタンでデバイスに転送します。
+<hr/><hr/>
 
 """
 print(html_body1 % (rl))
 #print(rl)
 
 
-html_body2="""
-PRE-SET: <input type="submit" value="EMA.csv" onclick="cpFileBtnOn(this)" /> <input type="submit" value="WAVE.csv" onclick="cpFileBtnOn(this)"/>
-<input type="submit" value="all_0.csv" onclick="cpFileBtnOn(this)"/> <input type="submit" value="all_1.csv" onclick="cpFileBtnOn(this)"/>
-<input type="submit" value="PList0.csv" onclick="cpFileBtnOn(this)"/>
-<form action="fileCpy.py" method="POST">
- <input type="text" id="csvFileNameText" name="inCSVFile" size="30" value="%s">
-
- <input type="submit" name="csvCp" value="CSV LOAD"/>
-</form>
-
-<hr/>
-"""
 
 rl='PList0.csv'
 #print(html_body2 % (rl))
@@ -153,8 +146,8 @@ csvList=[r.split('/')[-1] for r in glob.glob(path + "*.csv")]
 
 csvList.remove(PLIST)
 
-print('Preset Pattern CSV List<br/>')
-print('<select id="listbox" size="5" />')
+print('プリセットパターン CSV リスト<br/>')
+print('Select:<select id="listbox" size="5" />')
 #print('<select id="listbox" size="5"  />')
 
 for lst in csvList:
@@ -164,9 +157,8 @@ print('</select>')
 
 html_body2="""
 <form action="fileCpy.py" method="POST">
- <input type="text" id="csvFileNameText" name="inCSVFile" size="30" value="%s">
-
- <input type="submit" name="csvCp" value="LOAD"/>
+ 　<input type="text" id="csvFileNameText" name="inCSVFile" size="15" value="%s">
+ <input type="submit" name="csvCp" value="LOAD"/>←CSVファイルデータを上記エディタへ読み込みます。
 </form>
 
 <hr/>

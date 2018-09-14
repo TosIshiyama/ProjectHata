@@ -6,7 +6,7 @@
 * パーキンソン病の方が意図せず指先が震えてしまう現象を是正したい。
 
 ## 設計
-* 腕に巻いたバンドにセットされた振動アクチュエータを特定のパターンで振動させることによって、脳と指先の間の神経伝達フィードバックをジャミングできる（らしい？）→成功例あり
+* 腕に巻いたバンドにセットされた振動アクチュエータを特定のパターンで振動させることによって、脳と指先の間の神経伝達フィードバックをジャミングできる（らしい？）→成功例あり(?)  http://www.itmedia.co.jp/news/articles/1705/11/news098.html  
 
 
 ## プログラム仕様
@@ -47,11 +47,13 @@ https://github.com/TosIshiyama/ProjectHata
 とする。(TrueでRaspberryPi、FalseでWindows環境を想定）
 ----
 ## 環境と動作
-* デバッグ用にWindowsでサーバーを立ち上げ、GPIOアクセスはしない状態でテスト動作するようにした。
-  * cgi/thisis.py というスクリプト内のPI=FalseでWin環境、TrueでPI環境となる。
-  * web/hataLoop.pyは、スクリプト冒頭の PI=False を TrueにすればRaspberryPi上で実行されているとみなしてGPIOにアクセス（RaspberryPiモード）になる。Falseではデバッグ用プリントのみ。
+* pythonは3環境用。
+* Windowsではデバッグ用にサーバーを立ち上げ、GPIOアクセスはしない状態でテスト動作するようにした。
   * Windows環境では、/web/で python3 cgiserver.py を実行しておくと、以後、ブラウザから localhost:8000/ でアクセスできる。hataSystemへは http://localhost:8000/cgi/hataSystem.py でアクセス可。(web/でcgiserver.pyを立ち上げているので。)  
-  * RaspberryPiにはApache2がセットアップされている、pythonスクリプトをCGIで実行可に。
+
+* web/cgi/thisis.py というスクリプト内のPI=FalseでWin環境、TrueでPI環境となる。(web/thisis.pyはcgi以下からのシンボリックリンク)
+  * web/hataLoop.pyは、スクリプト冒頭の PI=False を TrueにすればRaspberryPi上で実行されているとみなしてGPIOにアクセス（RaspberryPiモード）になる。Falseではデバッグ用プリントのみ。
+* RaspberryPiにはApache2がセットアップされている、pythonスクリプトをCGIで実行可に。
   * pi上からはlocalhost/web/cgi/hataSystem.py でWebからの操作ができる。
   * なお、現在のRaspberryPiは研究室LANのローカルアドレス： 10.18.51.0 にあり。 http://10.18.51.0/web/cgi/hataSystem.py で、同一LAN環境からは別PCからでもアクセス可
 * メインプログラムのループは web/hataLoop.pyにあり、 pyhton3 hataLoop.py　を予め実行しておく。
