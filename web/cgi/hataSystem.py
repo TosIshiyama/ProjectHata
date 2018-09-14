@@ -25,7 +25,8 @@ else:
 PLIST = "PList.csv"
 FN = path + PLIST
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')  #日本語処理用のおまじない
+if not thisis.PI:
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')  #日本語処理用のおまじない(Winのみ)
 
 def txtFileRead(fn):
     """テキストファイル読み込み"""
@@ -59,7 +60,7 @@ font-size: 3em;
 
 """
 
-#print("<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>\n")
+print("Content-Type: text/html; charset=UTF-8")
 print(html_body0)
 
 # CSVファイルを取り込み
