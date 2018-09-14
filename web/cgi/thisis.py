@@ -2,4 +2,4 @@
 # -*- coding: utf-8 -*-
 
 # RaspberryPiかどうかの判定用フラグ RaspberryPiならばTrueにする
-PI=True
+PI=False

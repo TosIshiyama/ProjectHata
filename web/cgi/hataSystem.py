@@ -35,7 +35,7 @@ html_body0 = """
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv=”Cache-Control” content=”no-cache”>
+<meta http-equiv="Cache-Control" content="no-cache">
 <title>ProjectHata Vibration Sequencer</title>
 
 <link rel="stylesheet" type="text/css" href="../css/html5reset-1.6.1.css"  />
@@ -92,6 +92,7 @@ print('</form>')
 print('<br/>')
 print('<br/>WaitTime:')
 print('<input type="text" id="WaitTime" name="WaitTime" size=6 onKeyUp="waitTextValueCng(this)" ')
+#print('<input type="text" id="WaitTime" name="WaitTime" size=6 ')
 print('value="')
 
 print(wait_time)
